@@ -7,4 +7,4 @@ This module contains a class that defines a rectangle.
 class Rectangle:
     """A simple Rectangle class"""
 
-    ...
+    pass
