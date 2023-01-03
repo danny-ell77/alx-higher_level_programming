@@ -13,8 +13,8 @@ class Rectangle:
             width (int): the width of the rectangle.
             height (int): the height of the rectangle.
         """
-        self.width = width
-        self.height = height
+        self.__width = width
+        self.__height = height
 
     @property
     def width(self):
@@ -59,7 +59,7 @@ class Rectangle:
         if self.__width == 0 and self.__height == 0:
             return rectangle
 
-        for _ in range(self.__height + 1):
+        for _ in range(self.__height):
             rectangle += "#" * self.__width + "\n"
 
         return rectangle[:-1]
