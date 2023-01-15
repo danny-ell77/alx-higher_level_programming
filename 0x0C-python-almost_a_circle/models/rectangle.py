@@ -65,7 +65,7 @@ class Rectangle(Base):
         return self.height * self.width
 
     def display(self):
-        print("\n" * self.y)
+        print("\n" * self.y, end='')
         for _ in range(self.height):
             print(" " * self.x + "#" * self.width)
 
@@ -81,9 +81,11 @@ class Rectangle(Base):
             setattr(self, prop, value)
 
     def _update_with_kwargs(self, kwargs):
-        for prop, value in kwargs.items():
-            if hasattr(self, prop):
-                setattr(self, prop, value)
+        for key, value in kwargs.items():
+            if key == "id" and value is None:
+                self.__init__(self.width, self.height, self.x, self.y)
+            if hasattr(self, key):
+                setattr(self, key, value)
 
     def to_dictionary(self):
         return {'id': self.id, 'x': self.x, 'y': self.y, 'width': self.width, 'height': self.height}
