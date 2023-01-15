@@ -56,8 +56,40 @@ class Base:
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
-        ...
+        """Serializes the CSV string representation of list_objs to a file.
+        Args:
+            list_objs (list): a list of objects.
+        """
+        fields = []
+        with open(cls.__name__ + ".csv", 'w') as f:
+            if list_objs is None or len(list_objs) <= 0:
+                f.write('[]')
+            else:
+                if cls.__name__ is "Rectangle":
+                    fields = ['id', 'width', 'height', 'x', 'y']
+                elif cls.__name__ is "Square":
+                    fields = ['id', 'size', 'x', 'y']
+                writer = csv.DictWriter(f, fieldnames=fields)
+                for obj in list_objs:
+                    writer.writerow(obj.to_dictionary())
 
     @classmethod
     def load_from_file_csv(cls):
-        ...
+        """
+        Deserializes the CSV string representation
+        of list_objs from a file.
+        """
+        fields = []
+        try:
+            with open(cls.__name__ + ".csv", 'r') as f:
+                if cls.__name__ is "Rectangle":
+                    fields = ['id', 'width', 'height', 'x', 'y']
+                elif cls.__name__ is "Square":
+                    fields = ['id', 'size', 'x', 'y']
+                reader = csv.DictReader(f, fieldnames=fields)
+                dcts = [dict([k, int(v)] for k, v in l.items())
+                        for l in reader]
+                return [cls.create(**dct) for dct in dcts]
+
+        except IOError:
+            return []
