@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import json
 import csv
 
@@ -42,14 +43,14 @@ class Base:
             for obj in list_objs:
                 content.append(obj.to_dictionary())
 
-        with open(f'{cls.__name__}.json', 'w') as f:
+        with open(f"{cls.__name__}.json", "w") as f:
             f.write(json.dumps(content))
 
     @classmethod
     def load_from_file(cls):
-        filename = f'{cls.__name__}.json'
+        filename = f"{cls.__name__}.json"
         try:
-            with open(filename, 'r') as f:
+            with open(filename, "r") as f:
                 items = cls.from_json_string(f.read())
                 return [cls.create(**item) for item in items]
         except IOError:
@@ -62,14 +63,14 @@ class Base:
             list_objs (list): a list of objects.
         """
         fields = []
-        with open(cls.__name__ + ".csv", 'w') as f:
+        with open(cls.__name__ + ".csv", "w") as f:
             if list_objs is None or len(list_objs) <= 0:
-                f.write('[]')
+                f.write("[]")
             else:
-                if cls.__name__ is "Rectangle":
-                    fields = ['id', 'width', 'height', 'x', 'y']
-                elif cls.__name__ is "Square":
-                    fields = ['id', 'size', 'x', 'y']
+                if cls.__name__ == "Rectangle":
+                    fields = ["id", "width", "height", "x", "y"]
+                elif cls.__name__ == "Square":
+                    fields = ["id", "size", "x", "y"]
                 writer = csv.DictWriter(f, fieldnames=fields)
                 for obj in list_objs:
                     writer.writerow(obj.to_dictionary())
@@ -82,14 +83,13 @@ class Base:
         """
         fields = []
         try:
-            with open(cls.__name__ + ".csv", 'r') as f:
-                if cls.__name__ is "Rectangle":
-                    fields = ['id', 'width', 'height', 'x', 'y']
-                elif cls.__name__ is "Square":
-                    fields = ['id', 'size', 'x', 'y']
+            with open(cls.__name__ + ".csv", "r") as f:
+                if cls.__name__ == "Rectangle":
+                    fields = ["id", "width", "height", "x", "y"]
+                elif cls.__name__ == "Square":
+                    fields = ["id", "size", "x", "y"]
                 reader = csv.DictReader(f, fieldnames=fields)
-                dcts = [dict([k, int(v)] for k, v in l.items())
-                        for l in reader]
+                dcts = [dict([k, int(v)] for k, v in l.items()) for l in reader]
                 return [cls.create(**dct) for dct in dcts]
 
         except IOError:

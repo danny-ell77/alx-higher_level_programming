@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from models.rectangle import Rectangle
 
 
@@ -22,7 +23,7 @@ class Square(Rectangle):
         self.width = value
 
     def to_dictionary(self):
-        return {'size': self.size, 'x': self.x, 'y': self.y, 'id': self.id}
+        return {"size": self.size, "x": self.x, "y": self.y, "id": self.id}
 
     def update(self, *args, **kwargs):
         if args is not None and len(args) > 0:
@@ -35,4 +36,3 @@ class Square(Rectangle):
                     self.__init__(self.width, self.height, self.x, self.y)
                 if hasattr(self, key):
                     setattr(self, key, value)
-

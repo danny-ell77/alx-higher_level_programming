@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from models.base import Base
 
 
@@ -65,7 +66,7 @@ class Rectangle(Base):
         return self.height * self.width
 
     def display(self):
-        print("\n" * self.y, end='')
+        print("\n" * self.y, end="")
         for _ in range(self.height):
             print(" " * self.x + "#" * self.width)
 
@@ -88,7 +89,13 @@ class Rectangle(Base):
                 setattr(self, key, value)
 
     def to_dictionary(self):
-        return {'id': self.id, 'x': self.x, 'y': self.y, 'width': self.width, 'height': self.height}
+        return {
+            "id": self.id,
+            "x": self.x,
+            "y": self.y,
+            "width": self.width,
+            "height": self.height,
+        }
 
     def __str__(self):
         return f"[Rectangle] ({self.id}) {self.x}/{self.y} - {self.width}/{self.height}"
