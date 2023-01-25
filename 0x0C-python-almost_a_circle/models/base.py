@@ -1,12 +1,27 @@
 #!/usr/bin/python3
+"""This is the Base module.
+Contains the Base class which will be the
+“base” of all other classes in this project.
+"""
 import json
 import csv
 
 
 class Base:
+    """This class will be the “base” of all other classes in this project.
+    The goal is to manage id attribute in all our future classes
+    and to avoid duplicating the same code and same errors.
+    Attributes:
+        __nb_objects (int): the number of created Base objects.
+    """
+
     __nb_objects = 0
 
     def __init__(self, id=None):
+        """Initializes the default attributes of the Base object.
+        Args:
+            id (int): the identifier of the Base object.
+        """
         if id is not None:
             self.id = id
         else:
@@ -15,12 +30,20 @@ class Base:
 
     @staticmethod
     def to_json_string(list_dictionaries):
+        """Returns the JSON string representation of list_dictionaries.
+        Args:
+            list_dictionaries (list): a list of dictionaries.
+        """
         if list_dictionaries is None or len(list_dictionaries) < 1:
             return json.dumps([])
         return json.dumps(list_dictionaries)
 
     @staticmethod
     def from_json_string(json_string):
+        """Writes the JSON string representation of list_objs to a file.
+        Args:
+            list_objs (list): a list of objects.
+        """
         if json_string is not None and len(json_string) >= 1:
             return json.loads(json_string)
         return []
@@ -38,6 +61,10 @@ class Base:
 
     @classmethod
     def save_to_file(cls, list_objs):
+        """Returns the list of the JSON string representation json_string.
+        Args:
+            json_string (str): string representing a list of dictionaries.
+        """
         content = []
         if list_objs is not None and len(list_objs) > 0:
             for obj in list_objs:
@@ -48,6 +75,10 @@ class Base:
 
     @classmethod
     def load_from_file(cls):
+        """Returns an instance with all attributes already set.
+        Args:
+            dictionary (dict): the values of the wanted instance.
+        """
         filename = f"{cls.__name__}.json"
         try:
             with open(filename, "r") as f:
