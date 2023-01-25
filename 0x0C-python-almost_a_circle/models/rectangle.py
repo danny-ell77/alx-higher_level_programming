@@ -107,11 +107,19 @@ class Rectangle(Base):
             self._update_with_kwargs(kwargs)
 
     def _update_with_args(self, args):
+        """Update instance with args
+        Args:
+            args (list): attributes to be modified [id, width, height, x, y].
+        """
         props = ["id", "width", "height", "x", "y"]
         for prop, value in zip(props, args):
             setattr(self, prop, value)
 
     def _update_with_kwargs(self, kwargs):
+        """Update instance with kwargs
+        Args:
+            kwargs (dict): attributes to be modified.
+        """
         for key, value in kwargs.items():
             if key == "id" and value is None:
                 self.__init__(self.width, self.height, self.x, self.y)
