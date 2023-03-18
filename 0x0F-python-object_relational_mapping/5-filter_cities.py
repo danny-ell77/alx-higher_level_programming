@@ -20,7 +20,7 @@ if __name__ == "__main__":
         (value,),
     )
 
-    results = cursor.fetchall()
-
-    for row in results:
-        print(row, end=", ")
+    rows = cursor.fetchall()
+    for i in range(len(rows)):
+        print(rows[i][0], end=", " if i + 1 < len(rows) else "")
+print("")
