@@ -15,11 +15,16 @@ if __name__ == "__main__":
         host="localhost",
         user=username,
         passwd=password,
-        db=database)
+        db=database
+    )
     cursor = db.cursor()
 
     cursor.execute(
-        "SELECT c.`id`, c.`name`, s.`name` FROM `cities` AS c INNER JOIN `states` AS s ON c.`state_id` = s.`id` ORDER BY c.`id`;",
+        "SELECT c.`id`, c.`name`, s.`name` \
+             FROM `cities` AS c \
+                INNER JOIN `states` AS s \
+                ON c.`state_id` = s.`id` \
+             ORDER BY c.`id`;",
     )
 
     results = cursor.fetchall()
