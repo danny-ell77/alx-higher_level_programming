@@ -1,12 +1,11 @@
 #!/usr/bin/python3
 """
-script that lists all State objects from the database hbtn_0e_6_usa
-    - Your script should take 3 arguments: mysql username, mysql password
-    and database name
+script that adds the State object “Louisiana” to the database hbtn_0e_6_usa
+    - script takes 3 arguments: mysql username, mysql password and databasename
     - uses the module SQLAlchemy
     - imports State and Base from model_state
-    - script connects to a MySQL server running on localhost at port 3306
-    - Results are sorted in ascending order by states.id
+    - script should connect to a MySQL server running on localhost at port 3306
+    Print the new states.id after creation
 """
 
 if __name__ == '__main__':
@@ -20,7 +19,7 @@ if __name__ == '__main__':
     Session = sessionmaker(bind=engine)
     s = Session()
 
-    for row in s.query(State).order_by(State.id.asc()):
-        print(row.id, end="")
-        print(': ', end="")
-        print(row.name)
+    new_state = State(name="Louisiana")
+    s.add(new_state)
+    s.commit()
+    print(new_state.id)
