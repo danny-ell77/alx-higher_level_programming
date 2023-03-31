@@ -3,10 +3,10 @@
  with the email as a parameter, and displays the body of the response (decoded in utf-8)"""
 
 import sys
-import urllib.request
+from urllib import request, parse
 
 url = sys.argv[1]
 email = sys.argv[2]
-with urllib.request.urlopen(url, data={"email": email}) as response:
-    print("Your email is: {}".format(response.read().decode("utf-8")))
+with request.urlopen(url, parse.urlencode({"email": email}).encode("utf-8")) as response:
+    print(response.read().decode("utf-8"))
     
