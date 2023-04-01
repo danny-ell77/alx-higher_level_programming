@@ -4,7 +4,6 @@ URL and displays the body of the response."""
 
 import sys
 import requests
-from pprint import pprint
 
 if __name__ == "__main__":
     url = 'https://api.github.com/user'
@@ -13,4 +12,4 @@ if __name__ == "__main__":
 
     response = requests.get(url, auth=(username, password))
 
-    pprint(response.json().get("id"))
+    print(response.json().get("id"))
