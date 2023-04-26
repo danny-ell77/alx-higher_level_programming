@@ -9,8 +9,11 @@ let content;
 
 request(process.argv[2], function (error, response, body) {
 	if (error) throw error;
-	console.log(body)
-	fs.writeFile(filename, body, (err) => {
-	  if (err) console.log(err);
-	});
+	body.reduce((a, c) => {
+			if (c.completed == true){
+				a[c.userId] 
+			}
+		}, 
+		{}
+	)
 });
